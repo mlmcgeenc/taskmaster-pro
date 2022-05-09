@@ -117,5 +117,60 @@ $("#remove-tasks").on("click", function () {
 	saveTasks();
 });
 
+// make list items sortable
+$(".card .list-group").sortable({
+	connectWith: $(".card .list-group"),
+	scroll: false,
+	tolerance: "pointer",
+	helper: "clone",
+	// activate: function (event) {
+	// 	console.log("activate", this);
+	// },
+	// deactivate: function (event) {
+	// 	console.log("deactivate", this);
+	// },
+	// over: function (event) {
+	// 	console.log("over", event.target);
+	// },
+	// out: function (event) {
+	// 	console.log("out", event.target);
+	// },
+	update: function (event) {
+		var tempArr = [];
+		$(this)
+			.children()
+			.each(function () {
+				var text = $(this).find("p").text().trim();
+
+				var date = $(this).find("span").text().trim();
+
+				tempArr.push({
+					text: text,
+					date: date,
+				});
+			});
+		var arrName = $(this).attr("id").replace("list-", "");
+
+		tasks[arrName] = tempArr;
+		saveTasks();
+	},
+});
+
+// delete task items by dragging to trash element
+$("#trash").droppable({
+	accept: ".card .list-group-item",
+	tolerance: "intersect",
+	drop: function (event, ui) {
+		ui.draggable.remove();
+		console.log("dropped on trash");
+	},
+	over: function (event, ui) {
+		console.log("over trash");
+	},
+	out: function (event, ui) {
+		console.log("out");
+	},
+});
+
 // load tasks for the first time
 loadTasks();
