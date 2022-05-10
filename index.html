@@ -4,40 +4,28 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"
-		/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Staatliches&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
 		<link rel="stylesheet" href="./assets/css/style.css" />
 		<title>Taskmaster Pro</title>
 	</head>
 
 	<body>
 		<div class="row min-vh-100 no-gutters">
-			<header
-				class="col-12 col-lg-3 bg-dark text-light d-flex flex-column p-4 p-lg-3 sticky-top"
-			>
+			<header class="col-12 col-lg-3 bg-dark text-light d-flex flex-column p-4 p-lg-3 sticky-top">
 				<h1 class="text-center">Taskmaster Pro Edition</h1>
-				<button
-					class="btn btn-block btn-success"
-					id="create-task"
-					data-toggle="modal"
-					data-target="#task-form-modal"
-				>
-					Add Task
+				<button class="btn btn-block btn-add" id="create-task" data-toggle="modal" data-target="#task-form-modal">
+					<span class="oi oi-plus mr-2"></span>Add Task
 				</button>
-				<button class="btn btn-block btn-danger" id="remove-tasks">
-					Delete All Tasks
-				</button>
-				<p class="mt-auto d-none d-lg-block">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas
-					architecto ipsa excepturi aut non laudantium sequi fugit officiis
-					optio deleniti asperiores rem eius laborum maxime blanditiis culpa,
-					quis iste?
+				<button class="btn btn-block btn-delete" id="remove-tasks"><span class="oi oi-trash mr-2"></span>Delete All Tasks</button>
+				<span class="oi oi-task display-1 text-center mb-2 d-none d-lg-block mt-auto"></span>
+				<p class="d-none d-lg-block">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi voluptas architecto ipsa excepturi aut non laudantium sequi fugit
+					officiis optio deleniti asperiores rem eius laborum maxime blanditiis culpa, quis iste?
 				</p>
 			</header>
 			<main class="col-12 col-lg-9 d-flex flex-column">
@@ -54,10 +42,7 @@
 					<div class="col-12 col-md-6 col-xl-3 mb-3">
 						<div class="card">
 							<h4 class="card-header bg-dark text-light">In Progress</h4>
-							<ul
-								class="list-group list-group-flush"
-								id="list-inProgress"
-							></ul>
+							<ul class="list-group list-group-flush" id="list-inProgress"></ul>
 						</div>
 					</div>
 					<!-- end column in progress -->
@@ -65,10 +50,7 @@
 					<div class="col-12 col-md-6 col-xl-3 mb-3">
 						<div class="card">
 							<h4 class="card-header bg-dark text-light">In Review</h4>
-							<ul
-								class="list-group listgroup-flush"
-								id="list-inReview"
-							></ul>
+							<ul class="list-group listgroup-flush" id="list-inReview"></ul>
 						</div>
 					</div>
 					<!-- end column in review -->
@@ -81,35 +63,23 @@
 					</div>
 					<!-- end column in done -->
 				</div>
-				<div id="trash">
-					<div
-						class="w-100 bg-danger p-3 text-center text-light display-4 mt-auto"
-					>
-						Drop Here to Remove
+				<row class="mt-auto">
+					<div id="trash" class="overflow-hidden">
+						<div class="w-100 p-3 text-center bottom-trash">
+							<span class="oi oi-trash mx-auto mb-4"></span> Drop Here to Remove
+						</div>
 					</div>
-				</div>
+				</row>
 			</main>
 		</div>
 
 		<!-- Modal -->
-		<div
-			class="modal fade"
-			id="task-form-modal"
-			tabindex="-1"
-			role="dialog"
-			aria-labelledby="task-form-modal"
-			aria-hidden="true"
-		>
+		<div class="modal fade" id="task-form-modal" tabindex="-1" role="dialog" aria-labelledby="task-form-modal" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="task-form-modal">Add New Task</h5>
-						<button
-							class="close"
-							type="button"
-							data-dismiss="modal"
-							aria-label="Close"
-						>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -117,33 +87,17 @@
 						<form>
 							<div class="form-group">
 								<label for="modalTaskDescription">Task description</label>
-								<textarea
-									class="form-control"
-									id="modalTaskDescription"
-									rows="3"
-								></textarea>
+								<textarea class="form-control" id="modalTaskDescription" rows="3"></textarea>
 							</div>
 							<div class="form-group">
 								<label for="modalDueDate">Due date</label>
-								<input
-									class="form-control"
-									id="modalDueDate"
-									type="text"
-									placeholder="mm/dd/yyyy"
-									autocomplete="off"
-								/>
+								<input class="form-control" id="modalDueDate" type="text" placeholder="mm/dd/yyyy" autocomplete="off" />
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button
-							class="btn btn-secondary"
-							type="button"
-							data-dismiss="modal"
-						>
-							Close
-						</button>
-						<button class="btn btn-primary" type="button">Save Task</button>
+						<button class="btn btn-close" type="button" data-dismiss="modal">Close</button>
+						<button class="btn btn-save" type="button">Save Task</button>
 					</div>
 				</div>
 			</div>
